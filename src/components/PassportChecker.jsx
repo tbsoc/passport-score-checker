@@ -215,6 +215,7 @@ function PassportChecker() {
         <StampEmbed
           address={address}
           signMessage={signMessage}
+          isPassing={isHuman}
           onClose={() => setShowEmbed(false)}
           onScoreUpdate={() => {
             setShowEmbed(false)
