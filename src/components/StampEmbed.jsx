@@ -75,50 +75,16 @@ function StampEmbed({ address, signMessage, isPassing, onClose, onScoreUpdate })
           </button>
         </div>
         
-        {/* Body */}
+        {/* Body - always show the widget regardless of score */}
         <div style={{ padding: '16px 20px', overflowY: 'auto', flex: 1 }}>
-          {isPassing ? (
-            /* For passing users: show dashboard link prominently since the widget only shows a success state */
-            <div style={{ textAlign: 'center', padding: '20px 0' }}>
-              <div style={{ fontSize: '40px', marginBottom: '12px' }}>🛡️</div>
-              <p style={{ color: '#1a1a2e', fontSize: '15px', fontWeight: 600, marginBottom: '8px' }}>
-                You already have a passing score!
-              </p>
-              <p style={{ color: '#6b7280', fontSize: '13px', lineHeight: 1.6, marginBottom: '24px' }}>
-                To add more stamps and increase your score further, visit the Passport Dashboard where you can verify additional credentials.
-              </p>
-              <a 
-                href={`https://app.passport.xyz/#/dashboard/${address}`} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{
-                  display: 'inline-block',
-                  padding: '12px 24px',
-                  background: '#4f46e5',
-                  color: 'white',
-                  borderRadius: '10px',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                }}
-              >
-                Open Passport Dashboard
-              </a>
-              <p style={{ color: '#9ca3af', fontSize: '12px', marginTop: '16px' }}>
-                After adding stamps, come back and refresh your score.
-              </p>
-            </div>
-          ) : (
-            /* For non-passing users: show the embed widget */
-            <PassportScoreWidget
-              apiKey={EMBED_API_KEY}
-              scorerId={SCORER_ID}
-              address={address}
-              generateSignatureCallback={signMessage}
-              theme={DarkTheme}
-              collapseMode="off"
-            />
-          )}
+          <PassportScoreWidget
+            apiKey={EMBED_API_KEY}
+            scorerId={SCORER_ID}
+            address={address}
+            generateSignatureCallback={signMessage}
+            theme={DarkTheme}
+            collapseMode="off"
+          />
         </div>
 
         {/* Footer */}
@@ -126,27 +92,25 @@ function StampEmbed({ address, signMessage, isPassing, onClose, onScoreUpdate })
           padding: '14px 20px', 
           borderTop: '1px solid #f0f0f0',
           display: 'flex',
-          justifyContent: isPassing ? 'flex-end' : 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
           gap: '10px',
         }}>
-          {!isPassing && (
-            <a 
-              href={`https://app.passport.xyz/#/dashboard/${address}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={{
-                color: '#6b7280',
-                fontSize: '12px',
-                textDecoration: 'none',
-                fontWeight: 500,
-              }}
-              onMouseOver={e => e.currentTarget.style.color = '#4f46e5'}
-              onMouseOut={e => e.currentTarget.style.color = '#6b7280'}
-            >
-              Open Dashboard
-            </a>
-          )}
+          <a 
+            href={`https://app.passport.xyz/#/dashboard/${address}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{
+              color: '#6b7280',
+              fontSize: '12px',
+              textDecoration: 'none',
+              fontWeight: 500,
+            }}
+            onMouseOver={e => e.currentTarget.style.color = '#4f46e5'}
+            onMouseOut={e => e.currentTarget.style.color = '#6b7280'}
+          >
+            Open Dashboard
+          </a>
           <button 
             onClick={onScoreUpdate}
             style={{
