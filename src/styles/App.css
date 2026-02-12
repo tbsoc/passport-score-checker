@@ -1,0 +1,10 @@
+/* Minimal global styles to satisfy import for App */
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.app { min-height: 100vh; }
